@@ -1,0 +1,18 @@
+When setting up a parallel path,
+
+Job11 -> Job12 -> Job13 -> Job1Wait
+					[Converge Here based on a decision(decision value is configured inside an assignment task)]
+Job21 -> Job22 -> Job23 -> Job2Wait
+
+
+Suppose if Job12 fails then jump directly to the Job1Wait, then all the jobs related to Job1 sequence will be skipped and it will wait there until
+the remaining jobs are finished. 
+
+After all the jobs are finished then based on a decision, throw and exit.
+
+
+If the jobs are in parallel use a jump to jump to the last of the parallel path upon failure.
+If the jobs are in parallel use a jump to jump to the next job (i.e. StartJob step of the next job) upon SUCCESS or ERROR-HOLD or InActive.
+
+If the jobs are in sequence use an end to end to the task flow execution upon failure.
+If the jobs are in sequence use a jump to jump to the next job (i.e. StartJob step of the next job) in the task flow upon SUCCESS or ERROR-HOLD or InActive.

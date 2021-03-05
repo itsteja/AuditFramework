@@ -1,0 +1,43 @@
+.LOGON 10.0.0.230/dbc,dbc;  
+DATABASE Informatica_Test;  
+.SET WIDTH 253;
+.EXPORT FILE = JobOutput.txt;
+.SET SEPARATOR '|'
+
+SELECT ((TRIM((COALESCE(J.JobID,''))))
+ ||'|'||
+(CAST(TRIM((COALESCE(J.JobName,''))) AS VARCHAR(50)) )
+ ||'|'||
+(TRIM((COALESCE(JC.JobControlID,''))))
+||'|'||
+(TRIM(SUBSTR(TO_CHAR(JC.StartDateTime),0,CHAR_LENGTH(TO_CHAR(JC.StartDateTime))-6)))
+||'|'||
+(TRIM(SUBSTR(TO_CHAR(JC.EndDateTime),0,CHAR_LENGTH(TO_CHAR(JC.EndDateTime))-6)))
+ ||'|'||
+(TRIM((COALESCE(JC.RunID,'1'))))
+||'|'||
+(TRIM((COALESCE(JC.Status,'SUCCESS'))))
+||'|'||
+(TRIM((COALESCE(JC.Success_Source_Rows,'0'))))
+||'|'||
+(TRIM((COALESCE(JC.Success_Target_Rows,'0'))))
+||'|'||
+(TRIM((COALESCE(JC.Failed_Source_Rows,'0'))))
+||'|'||
+(TRIM((COALESCE(JC.Failed_Target_Rows,'0'))))
+) ( TITLE '')
+
+from
+Informatica_Test.JobControl JC
+JOIN Informatica_Test.Job J 
+ON J.JobID = JC.JobID
+JOIN Informatica_Test.BatchControl BC 
+ON BC.BatchControlID = JC.BatchCtrlID
+where BC.BatchID = 1 
+and BC.EndDatetime = (select max(EndDatetime) from Informatica_Test.BatchControl)
+and (JC.status = 'SUCCESS' OR JC.status = 'HELD')
+order by JC.StartDateTime;
+
+.EXPORT RESET
+.LOGOFF
+.EXIT

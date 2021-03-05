@@ -1,0 +1,2 @@
+HTMLData  
+ <b>Total Batch Runtime:  Mins</b><br><br><b>Batch Execution Summary</b>   <table border="1"><tr><th>Job ID</th><th>Job Name</th><th>JobCtrlID</th><th>StartTime</th><th>EndTime</th><th>RunID</th><th>Status</th><th>Source Success Rows</th><th>Target Success Rows</th><th>Source Failed Rows</th><th>Target Failed Rows</th></tr>  

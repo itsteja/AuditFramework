@@ -1,0 +1,16 @@
+.LOGON 10.0.0.230/dbc,dbc;  
+DATABASE Informatica_Test;  
+.SET WIDTH 253;
+.EXPORT FILE = BatchOutput.txt;
+.SET SEPARATOR '|'
+
+SELECT 
+(TRIM((COALESCE(CAST((CAST(EndDatetime AS TIME) - CAST(StartDatetime AS TIME) MINUTE(4)) AS INT),''))))
+( TITLE '')
+FROM Informatica_Test.BatchControl
+WHERE BatchID = 1
+    AND  EndDatetime = (SELECT MAX(EndDatetime) FROM Informatica_Test.BatchControl);
+
+.EXPORT RESET
+.LOGOFF
+.EXIT

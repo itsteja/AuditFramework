@@ -1,0 +1,16 @@
+For the command task >
+"Input Arguments" choose the "Assigned using" property as Formula. 
+
+Using LTRIM and RTRIM to get rid of new line and spaces in the beginning and the end of the error reason 
+
+We are trying to replace and with which character:
+1. Replace space with empty string
+2. Replace single quote with empty string
+3. Replace comma with empty string
+4. Use RTRIM,LTRIM to get rid of the error message from the last. 
+
+To pass the reason as a proper parameter to the command task configuring it like this:
+1. Concat single quote in the beginning and the end
+2. Then concat double quote in the beginning and the end 
+
+'"6"'||','||'"'||"'ERROR'"||'"'||','||'"'||"'"||sff:ltrim(sff:rtrim(fn:replace(fn:replace(fn:replace($temp.LandingToStageOrders[1]/fault[1]/reason, ' ', ''), "'", ''), ',', '')))||"'"||'"'||','||'"'||"0"||'"'||','||'"'||"0"||'"'||','||'"'||"0"||'"'||','||'"'||"0"||'"'

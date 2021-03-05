@@ -1,0 +1,1 @@
+After adding a task from the palette to the workflow/designer configure it's Error handling based on the location of the task where it is present. Set it to Custom Error Handling or Ignore or Suspend based on the need. 

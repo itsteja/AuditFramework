@@ -1,0 +1,3 @@
+Choose type as Formula and use this template to get time for any time zone:
+
+'Batch 1 Execution Started at: ' || fn:substring(fn:string(fn:adjust-date-to-timezone(fn:current-date(), xs:dayTimeDuration("PT5H30M"))), 0, 11) || ' ' || fn:substring(fn:string(fn:adjust-time-to-timezone(fn:current-time(), xs:dayTimeDuration("PT5H30M"))), 0, 9)
